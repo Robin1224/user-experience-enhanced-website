@@ -9,7 +9,11 @@
   --blue-light: #E6F2F7;
 
   --gray: #666;
-  --border-color: hsl(-0 0% 90%);
+  --border-color: #e6e6e6;
+
+  --default-star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 53.867 53.867" xml:space="preserve"><polygon fill="%23e6e6e6" points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/></svg>');
+  --active-star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 53.867 53.867" xml:space="preserve"><polygon fill="%23f7a100" points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/></svg>');
+  --hover-star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 53.867 53.867" xml:space="preserve"><polygon fill="%23fff0d4" points="26.934,1.318 35.256,18.182 53.867,20.887 40.4,34.013 43.579,52.549 26.934,43.798 10.288,52.549 13.467,34.013 0,20.887 18.611,18.182 "/></svg>');
 }
 
 * {
@@ -34,6 +38,10 @@ body {
 .layout-container {
   max-width: 1032px;
   margin: auto;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* ---- Header / Nav ---- */
@@ -206,11 +214,13 @@ nav li:not(.li-logo):hover {
   width: 100%;
   height: 100%;
   text-decoration: none;
+  cursor: default;
 }
 
 .house-card img {
   width: auto;
   height: 15rem;
+  cursor: pointer;
 }
 
 .house-card h2 {
@@ -260,6 +270,44 @@ nav li:not(.li-logo):hover {
 .delete-house:hover {
   background-color: var(--primary-color-light);
   border: 1px solid var(--primary-color-light);
+}
+
+/* Ratings */
+
+.rating-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+.rating-form input[type="radio"] {
+  appearance: none;
+  display: block;
+  background-image: var(--default-star);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.rating-form input[type="radio"]:hover,
+.rating-form input[type="radio"]:has(~ input[type="radio"]:hover) {
+  background-image: var(--active-star);
+}
+
+.rating-form input[type="radio"]:hover ~ input[type="radio"] {
+  background-image: var(--default-star) !important;
+}
+
+.rating-form input[type="radio"]:checked,
+.rating-form input[type="radio"]:has(~ input[type="radio"]:checked) {
+  background-image: var(--active-star);
 }
 
 /* ---- Breakpoints ---- */

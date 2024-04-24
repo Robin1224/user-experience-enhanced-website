@@ -10,7 +10,7 @@
 
   <ul class="favourites-grid">
     <% data.houses.forEach(currentHouse => { %> <%-
-    include('partials/house-card', {house: currentHouse.f_houses_id}) %> <% })
+    include('partials/card/house-card', {house: currentHouse.f_houses_id}) %> <% })
     %>
   </ul>
 </div>
