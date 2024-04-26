@@ -1,5 +1,3 @@
-import { query } from "express";
-
 const numberWithPeriods = (value) => {
   return value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
@@ -21,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = form.dataset.id;
       const rating = form.querySelector("input[name=rating]:checked").value;
 
-console.log(id, rating)
+      console.log(id, rating);
 
       fetch(`/rate/${id}/${rating}`, {
         method: "POST",
