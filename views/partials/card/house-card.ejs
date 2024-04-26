@@ -1,10 +1,10 @@
 <li class="house-card">
+  <form method="post" action="/delete/<%= house.id %>">
+    <button type="submit" class="delete-house">
+      <%- include('../icons/cross-icon') %>
+    </button>
+  </form>
   <a href="/house/<%= house.id %>">
-    <form method="post" action="/delete/<%= house.id %>">
-      <button type="submit" class="delete-house">
-        <%- include('../icons/cross-icon') %>
-      </button>
-    </form>
     <picture>
       <source
         srcset="https://fdnd-agency.directus.app/assets/<%= house.poster_image.id %>?format=avif"
@@ -21,11 +21,13 @@
         width="<%= house.poster_image.width %>"
       />
     </picture>
-    <div>
-      <h2><%= house.street %> <%= house.house_nr %></h2>
-      <span class="price">€<%= house.price %></span>
-      <span class="underlined">Bekijken</span>
-      <%- include('./rating-form') %>
-    </div>
   </a>
+  <div>
+    <a href="/house/<%= house.id %>">
+      <h2><%= house.street %> <%= house.house_nr %></h2>
+    </a>
+    <span class="price">€<%= house.price %></span>
+    <span class="underlined">Bekijken</span>
+    <%- include('./rating-form', {house: house}) %>
+  </div>
 </li>

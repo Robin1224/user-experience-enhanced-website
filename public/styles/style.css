@@ -211,16 +211,13 @@ nav li:not(.li-logo):hover {
 }
 
 .house-card a {
-  width: 100%;
-  height: 100%;
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
 }
 
 .house-card img {
   width: auto;
   height: 15rem;
-  cursor: pointer;
 }
 
 .house-card h2 {
