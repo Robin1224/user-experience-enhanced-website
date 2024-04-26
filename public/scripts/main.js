@@ -10,26 +10,23 @@ prices.forEach((price) => {
 });
 
 // Clientside POST
+const forms = document.querySelectorAll(".rating-form");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const forms = document.querySelectorAll(".rating-form");
+forms.forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    const id = form.dataset.id;
+    const rating = form.querySelector("input[name=rating]:checked").value;
 
-  forms.forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      const id = form.dataset.id;
-      const rating = form.querySelector("input[name=rating]:checked").value;
+    console.log(id, rating);
 
-      console.log(id, rating);
+    fetch(`/rate/${id}/${rating}`, {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
 
-      fetch(`/rate/${id}/${rating}`, {
-        method: "POST",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
-
-      event.preventDefault();
-    });
+    event.preventDefault();
   });
 });
