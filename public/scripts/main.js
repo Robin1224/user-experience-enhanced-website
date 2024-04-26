@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = form.dataset.id;
       const rating = form.querySelector("input[name=rating]:checked").value;
 
-console.log
+console.log(id, rating)
 
       fetch(`/rate/${id}/${rating}`, {
         method: "POST",
