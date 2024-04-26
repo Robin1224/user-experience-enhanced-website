@@ -1,3 +1,4 @@
+// Prijzen omzetten naar juiste formaat
 const numberWithPeriods = (value) => {
   return value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
@@ -9,10 +10,8 @@ prices.forEach((price) => {
   price.innerHTML = `€${numberWithPeriods(priceValue)}`;
 });
 
-// Clientside POST
-const forms = document.querySelectorAll(".rating-form");
-
-forms.forEach((form) => {
+// Clientside POST ratings
+document.querySelectorAll(".rating-form").forEach((form) => {
   form.addEventListener("submit", (event) => {
     const id = form.dataset.id;
     const rating = form.querySelector("input[name=rating]:checked").value;
@@ -30,3 +29,15 @@ forms.forEach((form) => {
     event.preventDefault();
   });
 });
+
+// document.querySelectorAll(".rating-radio").forEach((radio) => {
+//   radio.addEventListener("change", (event) => {
+//     if (event.target.checked) {
+//       form.submit();
+//     }
+//   });
+// });
+
+// document.querySelectorAll(".rating-form button").forEach((button) => {
+//   button.classList.add("hidden")
+// });
