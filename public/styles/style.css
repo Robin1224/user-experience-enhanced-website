@@ -202,7 +202,7 @@ nav li:not(.li-logo):hover {
   padding-bottom: 1rem;
 }
 
-.house-card div {
+.house-card .card-container {
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
@@ -273,6 +273,7 @@ nav li:not(.li-logo):hover {
 
 .rating-form {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -307,6 +308,39 @@ nav li:not(.li-logo):hover {
   background-image: var(--active-star);
 }
 
+/* Rating states */
+
+.loader, .rating-success {
+  color: var(--gray);
+  position: absolute;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  left: 0;
+  top: auto;
+}
+
+.loader:after {
+  content: " ";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin: 0.2rem;
+  border-radius: 50%;
+  border: 0.2rem solid currentColor;
+  border-color: currentColor transparent currentColor transparent;
+  animation: spin 1.2s linear infinite;
+}
+
+.rating-success .tick {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+}
+
+.rating-success .draw {
+  animation: draw 3s forwards;
+}
+
 /* ---- Breakpoints ---- */
 
 @media (min-width: 760px) {
@@ -338,5 +372,31 @@ nav li:not(.li-logo):hover {
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+/* ---- Keyframes ---- */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 18;
+  }
+  20% {
+    stroke-dashoffset: 0;
+  }
+  80% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -18;
   }
 }

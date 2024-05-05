@@ -52,18 +52,15 @@ app.get("/huis/:id/", function (request, response) {
 // ---- POST Routes ----
 
 app.post("/rate/:id/:rating", function (request, response) {
-  // Gebruik de request parameter id en haal het juiste huis op
-  fetchJson(
-    "https://fdnd-agency.directus.app/items/f_list/6?fields=*.*.*"
-  ).then((apiData) => {
-    const id = request.params.id;
-    const rating = request.params.rating;
+  setTimeout(() => { response.json({ status: "Success", houseID: request.params.id, rating: request.params.rating }); }, 2000);
 
-    ratings[id] = rating;
-    response.redirect(303, "/favorieten");
-    console.log(ratings);
-    // PLACEHOLDER TOTDAT ER EEN ROUTE IN DE API AANGEMAAKT IS
-  });
+//   fetch("https://fdnd-agency.directus.app/items/f_list/6", {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(apiData),
+//     });
 });
 
 app.post("/delete/:id", function (request, response) {
