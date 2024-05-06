@@ -43,7 +43,6 @@ app.get("/huis/:id/", function (request, response) {
   fetchJson(
     "https://fdnd-agency.directus.app/items/f_houses/" + request.params.id
   ).then((apiData) => {
-
     // Render huis.ejs uit de views map en geef de opgehaalde data mee
     response.render("huis", apiData);
   });
@@ -52,33 +51,43 @@ app.get("/huis/:id/", function (request, response) {
 // ---- POST Routes ----
 
 app.post("/rate/:id/:rating", function (request, response) {
-  setTimeout(() => { response.json({ status: "Success", houseID: request.params.id, rating: request.params.rating }); }, 2000);
+  const id = request.params.id;
+  const rating = request.params.rating;
 
-//   fetch("https://fdnd-agency.directus.app/items/f_list/6", {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(apiData),
-//     });
+  fetch("https://fdnd-agency.directus.app/items/f_feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "house": id,
+      "list": 6,
+      "user": 6,
+      "rating": { general: rating },
+    }),
+  }).then((data) => {
+    response.json(data);
+  });
 });
 
 app.post("/delete/:id", function (request, response) {
   const id = request.params.id;
   // Gebruik de request parameter id en haal het juiste huis op
-  fetchJson("https://fdnd-agency.directus.app/items/f_list/6").then((apiData) => {
-    delete apiData.data.houses[id];
+  fetchJson("https://fdnd-agency.directus.app/items/f_list/6").then(
+    (apiData) => {
+      delete apiData.data.houses[id];
 
-    fetch("https://fdnd-agency.directus.app/items/f_list/6", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(apiData),
-    });
+      fetch("https://fdnd-agency.directus.app/items/f_list/6", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(apiData),
+      });
 
-    console.log(`Deleted house with id: ${id}`);
-  });
+      console.log(`Deleted house with id: ${id}`);
+    }
+  );
   response.redirect(303, "/favorieten");
 });
 
