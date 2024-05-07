@@ -14,6 +14,16 @@ prices.forEach((price) => {
 document.querySelectorAll(".rating-form").forEach((form) => {
   const successElement = form.querySelector(".rating-success .tick");
 
+  // const radios = form.querySelectorAll("input[type=radio]");
+
+  //   radios.forEach((radio) => {
+  //     radio.addEventListener("change", (event) => {
+  //       if (event.target.checked) {
+  //         form.submit();
+  //       }
+  //     });
+  //   });
+
   successElement.addEventListener("animationend", () => {
     successElement.classList.remove("draw");
   });
@@ -34,15 +44,15 @@ document.querySelectorAll(".rating-form").forEach((form) => {
     rating: ${rating}`);
 
     try {
-    fetch(`/rate/${id}/${rating}`, {
-      method: "POST",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        loader.classList.add("hidden");
-        successElement.classList.add("draw");
-      });
+      fetch(`/rate/${id}/${rating}`, {
+        method: "POST",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          loader.classList.add("hidden");
+          successElement.classList.add("draw");
+        });
     } catch (error) {
       console.error(error);
       loader.classList.add("hidden");
@@ -52,14 +62,6 @@ document.querySelectorAll(".rating-form").forEach((form) => {
   });
 });
 
-document.querySelectorAll(".rating-radio").forEach((radio) => {
-  radio.addEventListener("change", (event) => {
-    if (event.target.checked) {
-      form.submit();
-    }
-  });
-});
-
 document.querySelectorAll(".rating-form button").forEach((button) => {
-  // button.classList.add("hidden")
+  // button.classList.add("hidden");
 });
